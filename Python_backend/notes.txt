@@ -1,0 +1,7 @@
+
+
+
+how should we deal with this :
+
+    1. semantics analysis
+    

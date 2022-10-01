@@ -1,0 +1,49 @@
+{
+    "manifest_version": 3,
+    "name": "SmartTracker",
+    "version": "3",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "scripts/Backgrounds/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "scripts/Content/content.js"
+            ],
+            "css" : [
+                "scripts/Content/content.css"
+            ] 
+        }
+    ],
+    "action": {
+        "default_popup": "scripts/Popops/popup.html",
+        "default_icon": {
+            "16": "/images/get_started16.png",
+            "32": "/images/get_started32.png",
+            "48": "/images/get_started48.png",
+            "128": "/images/get_started128.png"
+        },
+        "default_title": "SmartTracker to help you browse pages"
+    },
+    "commands": {
+        "getDefinitions": {
+            "suggested_key": {
+                "windows" : "Ctrl+Shift+F",
+                "mac" : "Command+Shift+L"
+            },
+            "description": "Get the smart definition of a word, sentence, or object"
+        }
+    }
+}
+
+
+

@@ -30,8 +30,27 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
         
         python_response = (await getStorageValuePromise("python_response"))["python_response"];
         console.log(python_response);
-        word = await getStorageValuePromise("word");
+        word = (await getStorageValuePromise("word"))["word"];
+        word = capitalizeFirstLetter(word);
         console.log(word);
+
+        let examples = []
+        let synonyms = []
+
+        let approvedWordAPI = python_response["approvedWordAPI"]
+        for (element in approvedWordAPI){
+            for(example in element["examples"]){
+                if(examples.length > 5) break;
+                examples.push(example)
+            }
+            if(element["synonyms"]){
+                for(synonym in element["synonysm"]){
+                    if(synonyms.length > 10) break;
+                    synonyms.push(element["synonyms"]);
+                }
+            }
+        }
+
         createModal()
         document.body.onload = createModal;
         function createModal() {
@@ -44,7 +63,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             }
             mainDiv.innerHTML = `
             <div id="wordBay-header">
-                <div id="wordBay-name">wordBay</div>
+                <div id="wordBay-name">WordBay</div>
                 <div id="wordBay-header-button-container">
                     <button id="wordBay-close">Close</button>
                 </div>
@@ -52,9 +71,9 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
-                    <h4 id="wordBay-word">${word.word} , [${python_response["POS"]}]</h4>
+                    <h4 id="wordBay-word"><span id="wordBay-word-def">${word}</span> , [${python_response["POS"]}]</h4>
                     <p>${python_response["best_def"]}</p>
-                    <h5 id="example">Example:</h5>
+                    <h5 id="example">Examples:</h5>
                 </div>
             </div>
             <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
@@ -104,6 +123,9 @@ function getStorageValuePromise(key){
     })
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 

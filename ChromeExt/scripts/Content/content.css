@@ -40,11 +40,20 @@
     text-align: center;
     color: black;
     font-weight: 600;
+    transition: all 0.2s ease-in;
+}
+
+#wordBay-header-button-container :hover{
+    scale: 1.2;
 }
     
 #wordBay-word {
     float: left;
     width: 50%
+}
+
+#wordBay-word-def{
+    font-weight: 900;
 }
 
 #wordBay-type {

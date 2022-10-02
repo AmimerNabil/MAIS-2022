@@ -51,8 +51,11 @@ def getDef():
 
     validDefs = []
 
+    biggest_def_length = 0
     for defs in definitions:
         if(defs["partOfSpeech"] == Glossary[POS]):
+            if len(defs["definition"]) > biggest_def_length:
+                biggest_def_length = len(defs["definition"])
             validDefs.append(defs)
 
 
@@ -60,9 +63,10 @@ def getDef():
 
     #2 . create similarity vectors for the definitions and for the examples
     for idx,defs in enumerate(validDefs):
-        definition = nlp(defs["definition"])
-        examples = defs["examples"]
-
+        definition = defs["definition"]
+        examples = defs.get("examples")
+        definition = nlp(definition)
+    
         idx_word = 0
         average_def_corolation = 0
         # first compare every noun verb and adjective with the full surrounding text in the definition
@@ -72,41 +76,32 @@ def getDef():
                 idx_word += 1
 
         # get the average correlation. 
-        average_def_corolation = average_def_corolation/idx if idx > 0 else average_def_corolation
-
-        # do the same thing with the definition example
-        average_ex_correlation = 0
-        idx_example = 0
-        for example in examples:
-            idx_example += 1
-            example_doc = nlp(example)
-            avg_for_one_ex = 0 # average correlation for this one example
-            idx = 0 # keeping track of relevant words in the example
-            for word_token in example_doc:
-                if(word_token.pos_ == "NOUN" or word_token.pos_ == "VERB" or word_token.pos_ == "ADJ"):
-                    avg_for_one_ex += word_token.similarity(surrounding_text_doc)
-                    idx += 1
-            avg_for_one_ex = avg_for_one_ex/idx if idx > 0 else avg_for_one_ex
-            average_ex_correlation += avg_for_one_ex
-        
-        average_ex_correlation = average_ex_correlation/idx_example if idx_example > 0 else average_ex_correlation
+        weight = len(defs)/biggest_def_length
+        average_def_corolation = (average_def_corolation/idx_word) * weight
 
         similarity_Array.append({
             "index" : idx,
             "def_cor" : average_def_corolation,
-            "avg_ex_cor" : average_ex_correlation,
-            "corr" : (average_def_corolation + average_ex_correlation)
+            "corr" : (average_def_corolation)
         })
+    
+    best = 0
+    sim = 0
+    for element in similarity_Array:
+        if sim < element["corr"]:
+            sim = element["corr"]
+            best = element["index"]
 
-        print(similarity_Array)
+    # print(similarity_Array)
 
     return jsonify({
         "status" : "200 OK",
-        "valid_defs" : validDefs
+        "valid_defs" : validDefs,
+        "similarity_array" : similarity_Array,
+        "best_Def" : validDefs[best]
     })
 
     
-
 if __name__ == '__main__':
     app.run(debug=True , port=_port)
 

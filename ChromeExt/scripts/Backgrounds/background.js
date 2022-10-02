@@ -65,7 +65,7 @@ const getDefinition = async () => {
          // })
 
          // console.log("tasked finished")
-         // await openWithInfo();
+          await openWithInfo();
       });
    });
 }

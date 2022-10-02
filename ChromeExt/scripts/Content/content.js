@@ -26,8 +26,8 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
     }
 
     if(request.method === "openPopup"){
-        console.log(await getStorageValuePromise("python_response"))
-        createModal();
+        console.log("hello world")
+        createModal()
 
         document.body.onload = createModal;
         function createModal() {

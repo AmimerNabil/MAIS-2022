@@ -33,7 +33,6 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
         word = await getStorageValuePromise("word");
         console.log(word);
         createModal()
-
         document.body.onload = createModal;
         function createModal() {
             let mainDiv = ""
@@ -45,8 +44,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             }
             mainDiv.innerHTML = `
             <div id="wordBay-header">
-                <h3 id="wordBay-name">wordBay</h3>
-                <button class="wordBay-close">&times;</button>
+                <div id="wordBay-name">wordBay</div>
+                <div id="wordBay-header-button-container">
+                    <button id="wordBay-close">&times;</button>
+                </div>
             </div>
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="wordBay-tab1">
@@ -70,6 +71,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             </div>
             `;
             document.body.appendChild(mainDiv);
+            document.getElementById("wordBay-close").addEventListener('click' , () => {
+                let element = document.getElementById("wordBay-main");
+                element.remove(); 
+            })        
         }
 
         //function to drop down tabs
@@ -100,8 +105,6 @@ function getStorageValuePromise(key){
         chrome.storage.local.get(key, resolve);
     })
 }
-
-
 
 
 

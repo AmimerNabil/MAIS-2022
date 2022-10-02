@@ -10,23 +10,32 @@
 
 #wordBay-header{
     background-color: #575757;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #wordBay-name{
     color: white;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
     border: none;
     text-align: left;
-    outline: none;
+    font-size: larger;
 }
 
-.wordBay-close {
-    position: relative;
-    font-size: 45px;
-    font-weight: 300;
-  }
+#wordBay-header-button-container {
+    height: 50%;
+    padding-right: 20px;
+    width: 40px;
+    border-radius: 5px;
+}
+
+#wordBay-close{
+    width: 100%;
+    background-color: azure;
+    color: black;
+}
 
 #wordBay-word {
     float: left;

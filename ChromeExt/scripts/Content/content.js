@@ -31,10 +31,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
 
         document.body.onload = createModal;
         function createModal() {
-            const mainDiv = document.createElement("div");
+            const mainDiv = document.createElement("div1234");
             mainDiv.setAttribute("id", "wordBay-main");
             mainDiv.innerHTML = `
-            <button type="button" class="wordBay-collapsible" id="button1">Definition/Example</button>
+            <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="tab1">
                 <div id="first">
                     <h5 id="word">Word:</h5>
@@ -44,13 +44,13 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
                 <p id="example">Example:</p>
             </div>
             
-            <button type="button" class="wordBay-collapsible" id="button2">Synonyms/Antonyms</button>
+            <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
             <div class="wordBay-content" id="tab2">
                 <p id="synonyms">Synonyms:</p>
                 <p id="antonyms">Antonyms:</p>
             </div>
 
-            <button type="button" class="wordBay-collapsible" id="button3">Relevant links</button>
+            <button type="button" class="wordBay-collapsible" id="button3">Relevant Links</button>
             <div class="wordBay-content" id="tab3">
                  <p id="links">Links:</p>
             </div>

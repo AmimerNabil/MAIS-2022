@@ -31,6 +31,7 @@ const getDefinition = async () => {
 
       // now that we have the tab ID, we send a message from it, to its content script
       chrome.tabs.sendMessage(tabs[0].id, message, async function(response){
+         if(response.text == `~~~empt¡™¡y string~~~`) return;
          let definitionURL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
          let definition = await (await fetch(`${definitionURL}${response.text}`, {
             method : "GET",

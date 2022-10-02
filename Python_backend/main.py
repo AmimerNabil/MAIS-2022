@@ -11,8 +11,6 @@ nlp = spacy.load("en_core_web_lg")
 app = Flask(__name__)
 _port = 3000
 
-
-
 Glossary = {
     "NOUN": "noun",
     "VERB": "verb",
@@ -63,8 +61,6 @@ def getDef():
             break
 
 
-    print(definition)
-
     biggest_length = len(max(definition, key=len))
 
     best_sim = 0
@@ -95,7 +91,6 @@ def getDef():
         weighted_similarity = (weighted_similarity, idx)
 
         print("average sim : " + str(weighted_similarity) + " for def : " + defs)
-
 
     return jsonify({
         "status" : "200 OK",

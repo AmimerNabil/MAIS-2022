@@ -6,9 +6,25 @@
     left: 1.5%;
     z-index: 99999;
     word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+#wordBay-header{
+    background-color: #575757;
+}
+
+#wordBay-name{
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
 }
 
 .wordBay-close {
+    position: relative;
     font-size: 45px;
     font-weight: 300;
   }

@@ -55,7 +55,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             
             <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
             <div class="wordBay-content" id="tab2">
-                <p id="synonyms">Synonyms:</p>
+                <p id="synonyms">Synonyms:hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
                 <p id="antonyms">Antonyms:</p>
             </div>
 

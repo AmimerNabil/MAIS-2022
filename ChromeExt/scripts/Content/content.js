@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
     if(request.method === "openPopup"){
         console.log("hello world")
         
-        python_response = await getStorageValuePromise("python_response");
+        python_response = (await getStorageValuePromise("python_response"))["python_response"];
         console.log(python_response);
         word = await getStorageValuePromise("word");
         console.log(word);
@@ -51,10 +51,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
-                    <h5 id="wordBay-word">Word:</h5>
-                    <h5 id="wordBay-type">Type:</h5>
+                    <h5 id="wordBay-word">${word.word}</h5>
+                    <h5 id="wordBay-type">[${python_response["POS"]}]</h5>
                 </div>
-                <p id="definition">Definition:</p>
+                <p id="definition">Definition: ${python_response["best_def"]}</p>
                 <p id="example">Example:</p>
             </div>
             

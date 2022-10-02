@@ -42,6 +42,11 @@
     text-align: center;
     color: black;
     font-weight: 600;
+    transition: all 0.2s ease-in;
+}
+
+#wordBay-header-button-container :hover{
+    scale: 1.2;
 }
 
 #wordBay-definition{
@@ -52,6 +57,10 @@
 #wordBay-word {
     display: flex;
     flex-direction: row;
+}
+
+#wordBay-word-def{
+    font-weight: 900;
 }
 
 #wordBay-type {

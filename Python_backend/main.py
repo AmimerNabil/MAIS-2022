@@ -58,14 +58,11 @@ def getDef():
     for object in result["type"]:
         if (object["type"].lower() == Glossary[POS].lower()):
             definition = object["definitions"]
-            break
-
 
     biggest_length = len(max(definition, key=len))
 
     best_sim = 0
     best_def_index = -1
-
 
     ####################
     # weighted_similarity index to determine correct definition. 
@@ -75,28 +72,44 @@ def getDef():
         length_of_def = len(defs)
         average_similarity = 0.0
         defs_doc = nlp(defs)
+        word_count = 0
         for word in defs_doc:
-            if(word.pos_ == "NOUN" or word.pos_ == "VERB"):
+            if(word.pos_ == "NOUN" or word.pos_ == "VERB" or word.pos_ == "ADJ"):
                 partialSum = surrounding_text_doc.similarity(word)
                 average_similarity += partialSum
+                word_count += 1
 
-        average_similarity = average_similarity/length_of_def
-        weighted_similarity = (length_of_def/biggest_length) * average_similarity
-        
+        average_similarity = average_similarity/word_count
 
-        if weighted_similarity > best_sim: 
-            best_sim = weighted_similarity
+        if average_similarity > best_sim: 
+            best_sim = average_similarity
             best_def_index = idx
 
-        weighted_similarity = (weighted_similarity, idx)
+        average_similarity = (average_similarity, idx)
 
-        print("average sim : " + str(weighted_similarity) + " for def : " + defs)
+        print("average sim : " + str(average_similarity) + " for def : " + defs)
+
+    best_Def = definition[best_def_index]
+    ## once we have the best definition : we try to get the synonys
+    definitions_wordAPI = result["wordAPI_Result"]["results"]
+    approvedDefs = []
+    best_Def_doc = nlp(best_Def)
+
+    for definition_w in definitions_wordAPI:
+        defs = nlp(definition_w["definition"])
+        sim = defs.similarity(best_Def_doc)
+        if sim > 0.70 :
+            approvedDefs.append({
+                "def" : definition_w,
+                "sim" : sim
+            })
 
     return jsonify({
         "status" : "200 OK",
         "POS" : POS,
         "defs" : definition,
-        "best_def" : definition[best_def_index]
+        "best_def" : best_Def,
+        "approvedWordAPI" : approvedDefs
     })
 
     

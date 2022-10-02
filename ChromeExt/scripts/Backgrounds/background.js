@@ -32,21 +32,37 @@ const getDefinition = async () => {
       // now that we have the tab ID, we send a message from it, to its content script
       chrome.tabs.sendMessage(tabs[0].id, message, async function(response){
          if(response.text == `~~~empty string~~~`) return;
+         
+         // definiitions from free dictionary api
+         
          let definitionURL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
          let definition = await (await fetch(`${definitionURL}${response.text}`, {
             method : "GET",
             "access-control-allow-origin": true,
          })).json()
 
-         if(definition[0] == undefined || definition[0] == null){
+         // other info from wordsAPI 
+         let definitionURL_wordAPI = 'https://wordsapiv1.p.rapidapi.com/words/'
+         let definition_wordAPI = await (await fetch(`${definitionURL_wordAPI}${response.text}`, {
+            method : "GET",
+            headers: {
+               'X-RapidAPI-Key': 'bcfd7505a6msh945819cda050110p1626e6jsn83648e06ffd3',
+               'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+             }
+         })).json()
+
+         if(!definition[0] || definition_wordAPI.success == false){
             await chrome.storage.sync.set({"wasFound" : false}, function() {
                console.log("No definitions were found. ") 
             })
+            openWithInfo();
             return;
          }
 
          definition = definition[0];
+         console.log(definition_wordAPI)
          let definitions = {
+            wordAPI_Result : definition_wordAPI,
             word : response.text,
             surrounding_Text : response.parent_element_text,
             type : []

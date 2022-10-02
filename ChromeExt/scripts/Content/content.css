@@ -1,14 +1,16 @@
 #wordBay-main {
     position: fixed;
-    height: auto;
+    height: 600px;
     width: 400px;
     top: 2.1%;
     left: 1.5%;
+    bottom: 2.1%;
     z-index: 99999;
     word-wrap: break-word;
     border-radius: 25px;
     overflow: hidden;
-    border: double;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #wordBay-header{
@@ -95,8 +97,13 @@
 #wordBay-first{
     display: flex;
     flex-direction: column;
+    padding: 15px 0px;
 }
 
 #wordBay-first > p, h5{
     margin: 0px;
+}
+
+#wordBay_list{
+    margin: 0px 10px;
 }

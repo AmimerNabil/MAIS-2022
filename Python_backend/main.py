@@ -59,8 +59,6 @@ def getDef():
         if (object["type"].lower() == Glossary[POS].lower()):
             definition = object["definitions"]
 
-    biggest_length = len(max(definition, key=len))
-
     best_sim = 0
     best_def_index = -1
 
@@ -69,7 +67,6 @@ def getDef():
     # seems to work the best !!!
     ####################
     for idx, defs in enumerate(definition):
-        length_of_def = len(defs)
         average_similarity = 0.0
         defs_doc = nlp(defs)
         word_count = 0

@@ -52,16 +52,17 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
-                    <h5 id="wordBay-word">${word.word}</h5>
-                    <h5 id="wordBay-type">[${python_response["POS"]}]</h5>
+                    <h4 id="wordBay-word">${word.word}</h4>
+                    <h4 id="wordBay-type">[${python_response["POS"]}]</h4>
                 </div>
-                <p id="definition">Definition: ${python_response["best_def"]}</p>
-                <p id="example">Example:</p>
+                <h5 id="definition">Definition:</h5>
+                <p>${python_response["best_def"]}</p>
+                <h5 id="example">Example:</h5>
             </div>
             
             <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
             <div class="wordBay-content" id="wordBay-tab2">
-                <p id="synonyms">Synonyms:hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                <p id="synonyms">Synonyms:</p>
                 <p id="antonyms">Antonyms:</p>
             </div>
 

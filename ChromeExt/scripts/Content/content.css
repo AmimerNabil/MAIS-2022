@@ -9,14 +9,14 @@
 }
 
 #wordBay-header{
-    background-color: #575757;
+    background-color: #E54B4B;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 #wordBay-name{
-    color: white;
+    color: #F7EBE8;
     cursor: pointer;
     padding: 18px;
     border: none;
@@ -32,8 +32,10 @@
 }
 
 #wordBay-close{
+    border-radius: 10px;
+    padding: 5px 15px;
     width: 100%;
-    background-color: azure;
+    background-color: #F7EBE8;
     color: black;
 }
 
@@ -48,8 +50,8 @@
 }
 
 .wordBay-collapsible {
-    background-color: rgb(0, 0, 0);
-    color: white;
+    background-color: #1E1E24;
+    color: #F7EBE8;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -60,14 +62,14 @@
 }
 
 .wordBay-active, .wordBay-collapsible:hover {
-    background-color: rgb(36, 36, 36);
+    background-color: #444140;
 }
 
 .wordBay-content {
     padding: 0 18px;
     display: tab1;
     overflow: hidden;
-    background-color: #575757;
+    background-color: #F7EBE8;
 }
 
 #wordBay-tab1 {

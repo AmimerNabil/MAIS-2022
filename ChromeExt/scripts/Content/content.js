@@ -31,14 +31,23 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
 
         document.body.onload = createModal;
         function createModal() {
-            const mainDiv = document.createElement("div1234");
-            mainDiv.setAttribute("id", "wordBay-main");
+            let mainDiv = ""
+            if (!document.getElementById("wordBay-main")) {
+                mainDiv = document.createElement("div");
+                mainDiv.setAttribute("id", "wordBay-main");
+            }else {
+                mainDiv = document.getElementById("wordBay-main");
+            }
             mainDiv.innerHTML = `
+            <div id="wordBay-header">
+                <h3 id="wordBay-name">wordBay</h3>
+                <button class="wordBay-close">&times;</button>
+            </div>
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="tab1">
-                <div id="first">
-                    <h5 id="word">Word:</h5>
-                    <h5 id="type">Type:</h5>
+                <div id="wordBay-first">
+                    <h5 id="wordBay-word">Word:</h5>
+                    <h5 id="wordBay-type">Type:</h5>
                 </div>
                 <p id="definition">Definition:</p>
                 <p id="example">Example:</p>

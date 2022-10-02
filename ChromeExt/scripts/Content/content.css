@@ -1,8 +1,26 @@
 #wordBay-main {
     position: fixed;
-    top: 30%;
-    left: 0;
+    height: 800px;
+    width: 400px;
+    top: 20%;
+    left: 1.5%;
     z-index: 99999;
+    word-wrap: break-word;
+}
+
+.wordBay-close {
+    font-size: 45px;
+    font-weight: 300;
+  }
+
+#wordBay-word {
+    float: left;
+    width: 50%
+}
+
+#wordBay-type {
+    float: right;
+    width: 50%
 }
 
 .wordBay-collapsible {

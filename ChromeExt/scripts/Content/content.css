@@ -1,12 +1,14 @@
 #wordBay-main {
     position: fixed;
-    height: 100%;
+    height: auto;
     width: 400px;
-    top: 0%;
+    top: 2.1%;
     left: 1.5%;
     z-index: 99999;
     word-wrap: break-word;
-    border-radius: 13px;
+    border-radius: 25px;
+    overflow: hidden;
+    border: double;
 }
 
 #wordBay-header{
@@ -41,6 +43,11 @@
     color: black;
     font-weight: 600;
 }
+
+#wordBay-definition{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
     
 #wordBay-word {
     float: left;
@@ -49,7 +56,7 @@
 
 #wordBay-type {
     float: right;
-    width: 50%
+    width: 30%
 }
 
 .wordBay-collapsible {
@@ -83,17 +90,4 @@
 
 #wordBay-first > p, h5{
     margin: 0px;
-}
-
-
-#wordBay-tab1 {
-    overflow-y: scroll;
-}
-
-#wordBay-tab2 {
-    overflow-y: scroll;
-}
-
-#wordBay-tab3 {
-    overflow-y: scroll;
 }

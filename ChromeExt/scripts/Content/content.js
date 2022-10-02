@@ -49,23 +49,22 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
                     <button id="wordBay-close">Close</button>
                 </div>
             </div>
-            <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
+            <button type="button" class="wordBay-collapsible" id="button1">Definition</button>
             <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
                     <h4 id="wordBay-word">${word.word} , [${python_response["POS"]}]</h4>
-                    <p>${python_response["best_def"]}</p>
-                    <h5 id="example">Example:</h5>
+                    <p id="wordBay-definition">${python_response["best_def"]}</p>
                 </div>
             </div>
-            <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
+            <button type="button" class="wordBay-collapsible" id="button2">Examples and Synonyms</button>
             <div class="wordBay-content" id="wordBay-tab2">
-                <p id="synonyms">Synonyms:</p>
-                <p id="antonyms">Antonyms:</p>
+                <h5 id="example">Examples:</h5>
+                <h5 id="synonyms">Synonyms:</h5>
             </div>
 
             <button type="button" class="wordBay-collapsible" id="button3">Relevant Links</button>
             <div class="wordBay-content" id="wordBay-tab3">
-                 <p id="links">Links:</p>
+                 <h5 id="links">Links:</h5>
             </div>
             `;
             document.body.appendChild(mainDiv);

@@ -1,12 +1,11 @@
 #wordBay-main {
     position: fixed;
-    height: 800px;
+    height: 100%;
     width: 400px;
-    top: 20%;
+    top: 0%;
     left: 1.5%;
     z-index: 99999;
     word-wrap: break-word;
-    overflow-y: scroll;
 }
 
 #wordBay-header{
@@ -60,4 +59,16 @@
     display: tab1;
     overflow: hidden;
     background-color: #575757;
-  }
+}
+
+#wordBay-tab1 {
+    overflow-y: scroll;
+}
+
+#wordBay-tab2 {
+    overflow-y: scroll;
+}
+
+#wordBay-tab3 {
+    overflow-y: scroll;
+}

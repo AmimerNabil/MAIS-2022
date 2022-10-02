@@ -26,7 +26,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
     }
 
     if(request.method === "openPopup"){
-        console.log("hello world")
+        python_response = await getStorageValuePromise("python_response");
+        console.log(python_response);
+        word = await getStorageValuePromise("word");
+        console.log(word);
         createModal()
 
         document.body.onload = createModal;
@@ -44,7 +47,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
                 <button class="wordBay-close">&times;</button>
             </div>
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
-            <div class="wordBay-content" id="tab1">
+            <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
                     <h5 id="wordBay-word">Word:</h5>
                     <h5 id="wordBay-type">Type:</h5>
@@ -54,13 +57,13 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             </div>
             
             <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
-            <div class="wordBay-content" id="tab2">
+            <div class="wordBay-content" id="wordBay-tab2">
                 <p id="synonyms">Synonyms:hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
                 <p id="antonyms">Antonyms:</p>
             </div>
 
             <button type="button" class="wordBay-collapsible" id="button3">Relevant Links</button>
-            <div class="wordBay-content" id="tab3">
+            <div class="wordBay-content" id="wordBay-tab3">
                  <p id="links">Links:</p>
             </div>
             `;

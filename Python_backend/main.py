@@ -41,7 +41,6 @@ def getDef():
     word = req["definition"]["word"].strip()
     definitions = req["definition"]["results"]
     surrounding_text_doc = nlp(req["surrounding_Text"].replace("\n", "").replace("\t", ""))
-    print(surrounding_text_doc)
 
     # 1. find the type of the word. 
     POS = ""

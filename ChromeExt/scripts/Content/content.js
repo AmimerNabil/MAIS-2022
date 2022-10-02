@@ -31,7 +31,8 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
         python_response = (await getStorageValuePromise("python_response"))["python_response"];
         word = (await getStorageValuePromise("word"))["word"];
         word = capitalizeFirstLetter(word);
-
+        links = (await getStorageValuePromise("links"))["links"]
+        console.log(links)
         let examples = []
         let synonyms = []
 
@@ -92,10 +93,11 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
                     <h5 id="synonyms">Synonyms:</h5>
                 </div>
             </div>
-
             <button type="button" class="wordBay-collapsible" id="button3">Relevant Links</button>
             <div class="wordBay-content" id="wordBay-tab3">
-                 <h5 id="links">Links:</h5>
+                <div id="wordBay-links-container">
+                    <h5 id="links">Links:</h5>
+                </div>
             </div>
             `;
             document.body.appendChild(mainDiv);
@@ -141,8 +143,28 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
                     ul_synonym.appendChild(li);
             }
             
+            let ul_links = document.createElement("ul");
+            ul_links.setAttribute("id", "wordBay_list");
+            if(links.length > 0){
+                for(let i = 0; i < links.length; i++){
+                    li = document.createElement("li");
+                    let a =  document.createElement("a");
+                    a.appendChild(document.createTextNode(links[i]));
+                    li.appendChild(a);
+                    li.style["list-style-type"] = "disc" 
+                    ul_links.appendChild(li);
+                }
+            }else{
+                li = document.createElement("li");
+                li.appendChild(document.createTextNode("No links were found."));
+                li.style["list-style-type"] = "disc" 
+                ul_links.appendChild(li);
+            }
+
             document.getElementById("wordBay-example-container").appendChild(ul_example);
             document.getElementById("wordBay-synonyms-container").appendChild(ul_synonym);
+            document.getElementById("wordBay-links-container").appendChild(ul_links);
+            
         }
 
         //function to drop down tabs

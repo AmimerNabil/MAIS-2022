@@ -60,7 +60,7 @@ const getDefinition = async () => {
          }
 
          definition = definition[0];
-         console.log(definition_wordAPI)
+         console.log(definition)
          let definitions = {
             wordAPI_Result : definition_wordAPI,
             word : response.text,
@@ -86,7 +86,8 @@ const getDefinition = async () => {
 
          let newObject = {
             word : response.text,
-            python_response : python_response
+            python_response : python_response,
+            links : definition.sourceUrls
          }
 
          await chrome.storage.local.set(newObject, function() {

@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
         } else {
             let response = {
                 status: "No Content",
-                text: "~~~empt¡™¡y string~~~"
+                text: "~~~empty string~~~"
             }
             sendResponse(response);
         }

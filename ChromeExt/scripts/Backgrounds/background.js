@@ -31,15 +31,21 @@ const getDefinition = async () => {
 
       // now that we have the tab ID, we send a message from it, to its content script
       chrome.tabs.sendMessage(tabs[0].id, message, async function(response){
-         if(response.text == `~~~empt¡™¡y string~~~`) return;
+         if(response.text == `~~~empty string~~~`) return;
          let definitionURL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
          let definition = await (await fetch(`${definitionURL}${response.text}`, {
             method : "GET",
             "access-control-allow-origin": true,
          })).json()
 
-         definition = definition[0];
+         if(definition[0] == undefined || definition[0] == null){
+            await chrome.storage.sync.set({"wasFound" : false}, function() {
+               console.log("No definitions were found. ") 
+            })
+            return;
+         }
 
+         definition = definition[0];
          let definitions = {
             word : response.text,
             surrounding_Text : response.parent_element_text,

@@ -88,7 +88,7 @@
 }
 
 .wordBay-content {
-    padding: 0 18px;
+    padding: 20px;
     display: tab1;
     overflow: hidden;
     background-color: #F7EBE8;
@@ -105,5 +105,5 @@
 }
 
 #wordBay_list{
-    margin: 0px 10px;
+    padding: 10px;
 }

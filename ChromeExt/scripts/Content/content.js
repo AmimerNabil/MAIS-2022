@@ -109,20 +109,36 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             // append synonyms and examples
             let ul_example = document.createElement('ul');
             ul_example.setAttribute("id", "wordBay_list")
-            for (let i = 0; i < examples.length; i++){
+            if(examples.length > 0){
+                for (let i = 0; i < examples.length; i++){
+                    if(examples.length > 5) break;
+                    li = document.createElement("li");
+                    li.appendChild(document.createTextNode(examples[i]));
+                    li.style["list-style-type"] = "disc" 
+                    ul_example.appendChild(li);
+                }
+            }else{
                 li = document.createElement("li");
-                li.appendChild(document.createTextNode(examples[i]));
+                li.appendChild(document.createTextNode("No examples provided"));
                 li.style["list-style-type"] = "disc" 
                 ul_example.appendChild(li);
             }
             
             let ul_synonym = document.createElement('ul');
             ul_synonym.setAttribute("id", "wordBay_list")
-            for (let i = 0; i < synonyms.length; i++){
-                li = document.createElement("li");
-                li.appendChild(document.createTextNode(synonyms[i]));
-                li.style["list-style-type"] = "disc" 
-                ul_synonym.appendChild(li);
+            if(synonyms.length > 0){
+                for (let i = 0; i < synonyms.length; i++){
+                    if(synonyms.length > 10) break;
+                    li = document.createElement("li");
+                    li.appendChild(document.createTextNode(synonyms[i]));
+                    li.style["list-style-type"] = "disc" 
+                    ul_synonym.appendChild(li);
+                }
+            }else{
+                    li = document.createElement("li");
+                    li.appendChild(document.createTextNode("No synonyms were found."));
+                    li.style["list-style-type"] = "disc" 
+                    ul_synonym.appendChild(li);
             }
             
             document.getElementById("wordBay-example-container").appendChild(ul_example);

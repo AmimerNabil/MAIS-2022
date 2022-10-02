@@ -80,7 +80,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
                     <h4 id="wordBay-word"><span id="wordBay-word-def">${word}</span> , [${python_response["POS"]}]</h4>
-                    <p>${python_response["best_def"]}</p>
+                    <p id="wordBay-definition">${python_response["best_def"]}</p>
                 </div>
             </div>
             <button type="button" class="wordBay-collapsible" id="button2">Examples and Synonyms</button>

@@ -96,7 +96,7 @@ def getDef():
     for definition_w in definitions_wordAPI:
         defs = nlp(definition_w["definition"])
         sim = defs.similarity(best_Def_doc)
-        if sim > 0.70 :
+        if sim > 0.5 :
             approvedDefs.append({
                 "def" : definition_w,
                 "sim" : sim

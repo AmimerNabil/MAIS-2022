@@ -96,7 +96,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             <button type="button" class="wordBay-collapsible" id="button3">Relevant Links</button>
             <div class="wordBay-content" id="wordBay-tab3">
                 <div id="wordBay-links-container">
-                    <h5 id="links">Links:</h5>
+                    <h5 id="links">Source Links:</h5>
                 </div>
             </div>
             `;

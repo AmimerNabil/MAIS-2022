@@ -52,7 +52,12 @@ const getDefinition = async () => {
          })).json()
 
          if(!definition[0] || definition_wordAPI.success == false){
-            await chrome.storage.local.set({"wasFound" : false}, function() {
+            let object = {
+               word : `No definitions were found for ${response.text}`,
+               python_response : {},
+               links : {}
+            }
+            await chrome.storage.local.set(object, function() {
                console.log("No definitions were found. ") 
             })
             openWithInfo();

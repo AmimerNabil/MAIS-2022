@@ -31,41 +31,48 @@ const getDefinition = async () => {
 
       // now that we have the tab ID, we send a message from it, to its content script
       chrome.tabs.sendMessage(tabs[0].id, message, async function(response){
-         let definitionURL = 'https://wordsapiv1.p.rapidapi.com/words/'
+         let definitionURL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
          let definition = await (await fetch(`${definitionURL}${response.text}`, {
             method : "GET",
-            headers: {
-               'X-RapidAPI-Key': 'bcfd7505a6msh945819cda050110p1626e6jsn83648e06ffd3',
-               'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-             }
+            "access-control-allow-origin": true,
          })).json()
 
-         let python_req = {
-            definition : definition,
-            surrounding_Text : response.parent_element_text
+         definition = definition[0];
+
+         let definitions = {
+            word : response.text,
+            surrounding_Text : response.parent_element_text,
+            type : []
          }
 
-         console.log(python_req)
-         
+         for (let i = 0; i < definition.meanings.length; i++) {
+            let object = definition.meanings[i]
+            let type = object.partOfSpeech
+            let defs = object.definitions.map((element) => element.definition);
+
+            definitions.type.push({
+               type : type,
+               definitions : defs
+            })
+         }
+
          let python_response = await (await fetch(`http://localhost:3000/getDef`, {
             method : "POST",
-            body : JSON.stringify(python_req)
+            body : JSON.stringify(definitions)
          })).json()
 
-         console.log(python_response)
+         let newObject = {
+            word : response.text,
+            python_response : python_response
+         }
 
-         // let newObject = {
-         //    word : response.text,
-         //    python_response : python_response
-         // }
+         await chrome.storage.sync.set(newObject, function() {
+            console.log("added object to storage ") 
+            console.log(newObject)
+         })
 
-         // await chrome.storage.sync.set(newObject, function() {
-         //    console.log("added object to storage ") 
-         //    console.log(newObject)
-         // })
-
-         // console.log("tasked finished")
-          await openWithInfo();
+         console.log("tasked finished")
+         await openWithInfo();
       });
    });
 }

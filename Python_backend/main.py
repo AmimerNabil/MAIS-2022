@@ -37,67 +37,71 @@ def hello():
 
 @app.route('/getDef', methods = ['POST'])
 def getDef():
-    req =  request.get_json(force=True)
-    word = req["definition"]["word"].strip()
-    definitions = req["definition"]["results"]
-    surrounding_text_doc = nlp(req["surrounding_Text"].replace("\n", "").replace("\t", ""))
+    result =  request.get_json(force=True)
+    types = result["type"]
+    definitions = []
 
-    # 1. find the type of the word. 
+    for type in types:
+        object = {
+            "type" : type["type"],
+            "def" : type["definitions"]
+        }
+        definitions.append(object)
+
+    surrounding_text_doc = nlp(result["surrounding_Text"])
+
     POS = ""
+    word = result["word"].strip()
     for token in surrounding_text_doc:
         if (token.text == word):
             POS = token.pos_
-
-    validDefs = []
-
-    biggest_def_length = 0
-    for defs in definitions:
-        if(defs["partOfSpeech"] == Glossary[POS]):
-            if len(defs["definition"]) > biggest_def_length:
-                biggest_def_length = len(defs["definition"])
-            validDefs.append(defs)
-
-
-    similarity_Array = []
-
-    #2 . create similarity vectors for the definitions and for the examples
-    for idx,defs in enumerate(validDefs):
-        definition = defs["definition"]
-        examples = defs.get("examples")
-        definition = nlp(definition)
     
-        idx_word = 0
-        average_def_corolation = 0
-        # first compare every noun verb and adjective with the full surrounding text in the definition
-        for word_token in definition:
-            if(word_token.pos_ == "NOUN" or word_token.pos_ == "VERB" or word_token.pos_ == "ADJ"):
-                average_def_corolation += word_token.similarity(surrounding_text_doc)
-                idx_word += 1
+    definition = []
+    for object in result["type"]:
+        if (object["type"].lower() == Glossary[POS].lower()):
+            definition = object["definitions"]
+            break
 
-        # get the average correlation. 
-        weight = len(defs)/biggest_def_length
-        average_def_corolation = (average_def_corolation/idx_word) * weight
 
-        similarity_Array.append({
-            "index" : idx,
-            "def_cor" : average_def_corolation,
-            "corr" : (average_def_corolation)
-        })
-    
-    best = 0
-    sim = 0
-    for element in similarity_Array:
-        if sim < element["corr"]:
-            sim = element["corr"]
-            best = element["index"]
+    print(definition)
 
-    # print(similarity_Array)
+    biggest_length = len(max(definition, key=len))
+
+    best_sim = 0
+    best_def_index = -1
+
+
+    ####################
+    # weighted_similarity index to determine correct definition. 
+    # seems to work the best !!!
+    ####################
+    for idx, defs in enumerate(definition):
+        length_of_def = len(defs)
+        average_similarity = 0.0
+        defs_doc = nlp(defs)
+        for word in defs_doc:
+            if(word.pos_ == "NOUN" or word.pos_ == "VERB"):
+                partialSum = surrounding_text_doc.similarity(word)
+                average_similarity += partialSum
+
+        average_similarity = average_similarity/length_of_def
+        weighted_similarity = (length_of_def/biggest_length) * average_similarity
+        
+
+        if weighted_similarity > best_sim: 
+            best_sim = weighted_similarity
+            best_def_index = idx
+
+        weighted_similarity = (weighted_similarity, idx)
+
+        print("average sim : " + str(weighted_similarity) + " for def : " + defs)
+
 
     return jsonify({
         "status" : "200 OK",
-        "valid_defs" : validDefs,
-        "similarity_array" : similarity_Array,
-        "best_Def" : validDefs[best]
+        "POS" : POS,
+        "defs" : definition,
+        "best_def" : definition[best_def_index]
     })
 
     

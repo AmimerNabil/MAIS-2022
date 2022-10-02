@@ -1,14 +1,29 @@
 #wordBay-main {
     position: fixed;
-    height: 800px;
+    height: 100%;
     width: 400px;
-    top: 20%;
+    top: 0%;
     left: 1.5%;
     z-index: 99999;
     word-wrap: break-word;
 }
 
+#wordBay-header{
+    background-color: #575757;
+}
+
+#wordBay-name{
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
 .wordBay-close {
+    position: relative;
     font-size: 45px;
     font-weight: 300;
   }
@@ -44,4 +59,16 @@
     display: tab1;
     overflow: hidden;
     background-color: #575757;
-  }
+}
+
+#wordBay-tab1 {
+    overflow-y: scroll;
+}
+
+#wordBay-tab2 {
+    overflow-y: scroll;
+}
+
+#wordBay-tab3 {
+    overflow-y: scroll;
+}

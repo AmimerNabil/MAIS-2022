@@ -32,10 +32,10 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
         document.body.onload = createModal;
         function createModal() {
             const mainDiv = document.createElement("div");
-            mainDiv.setAttribute("id", "main");
+            mainDiv.setAttribute("id", "wordBay-main");
             mainDiv.innerHTML = `
-            <button type="button" class="collapsible" id="button1">Definition/Example</button>
-            <div class="content" id="tab1">
+            <button type="button" class="wordBay-collapsible" id="button1">Definition/Example</button>
+            <div class="wordBay-content" id="tab1">
                 <div id="first">
                     <h5 id="word">Word:</h5>
                     <h5 id="type">Type:</h5>
@@ -44,14 +44,14 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
                 <p id="example">Example:</p>
             </div>
             
-            <button type="button" class="collapsible" id="button2">Synonyms/Antonyms</button>
-            <div class="content" id="tab2">
+            <button type="button" class="wordBay-collapsible" id="button2">Synonyms/Antonyms</button>
+            <div class="wordBay-content" id="tab2">
                 <p id="synonyms">Synonyms:</p>
                 <p id="antonyms">Antonyms:</p>
             </div>
 
-            <button type="button" class="collapsible" id="button3">Relevant links</button>
-            <div class="content" id="tab3">
+            <button type="button" class="wordBay-collapsible" id="button3">Relevant links</button>
+            <div class="wordBay-content" id="tab3">
                  <p id="links">Links:</p>
             </div>
             `;
@@ -59,12 +59,12 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
         }
 
         //function to drop down tabs
-        var coll = document.getElementsByClassName("collapsible");
+        var coll = document.getElementsByClassName("wordBay-collapsible");
         var i;
         
         for (i = 0; i < coll.length; i++) {
           coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
+            this.classList.toggle("wordBay-active");
             var content = this.nextElementSibling;
             if (content.style.display === "block") {
               content.style.display = "none";

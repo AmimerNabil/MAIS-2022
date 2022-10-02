@@ -1,10 +1,11 @@
-#main {
+#wordBay-main {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100;
 }
 
-.collapsible {
+.wordBay-collapsible {
     background-color: rgb(10, 131, 218);
     color: white;
     cursor: pointer;
@@ -16,11 +17,11 @@
     font-size: 15px;
 }
 
-.active, .collapsible:hover {
+.wordBay-active, .wordBay-collapsible:hover {
     background-color: rgb(38, 0, 225);
 }
 
-.content {
+.wordBay-content {
     padding: 0 18px;
     display: tab1;
     overflow: hidden;

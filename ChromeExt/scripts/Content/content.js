@@ -46,20 +46,17 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
             <div id="wordBay-header">
                 <div id="wordBay-name">wordBay</div>
                 <div id="wordBay-header-button-container">
-                    <button id="wordBay-close">&times;</button>
+                    <button id="wordBay-close">Close</button>
                 </div>
             </div>
             <button type="button" class="wordBay-collapsible" id="button1">Definition and Examples</button>
             <div class="wordBay-content" id="wordBay-tab1">
                 <div id="wordBay-first">
-                    <h4 id="wordBay-word">${word.word}</h4>
-                    <h4 id="wordBay-type">[${python_response["POS"]}]</h4>
+                    <h4 id="wordBay-word">${word.word} , [${python_response["POS"]}]</h4>
+                    <p>${python_response["best_def"]}</p>
+                    <h5 id="example">Example:</h5>
                 </div>
-                <h5 id="definition">Definition:</h5>
-                <p>${python_response["best_def"]}</p>
-                <h5 id="example">Example:</h5>
             </div>
-            
             <button type="button" class="wordBay-collapsible" id="button2">Synonyms and Antonyms</button>
             <div class="wordBay-content" id="wordBay-tab2">
                 <p id="synonyms">Synonyms:</p>

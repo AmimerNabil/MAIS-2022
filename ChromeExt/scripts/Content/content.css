@@ -6,6 +6,7 @@
     left: 1.5%;
     z-index: 99999;
     word-wrap: break-word;
+    border-radius: 13px;
 }
 
 #wordBay-header{
@@ -21,13 +22,13 @@
     padding: 18px;
     border: none;
     text-align: left;
-    font-size: larger;
+    font-size: x-large;
+    font-weight: 800;
 }
 
 #wordBay-header-button-container {
     height: 50%;
     padding-right: 20px;
-    width: 40px;
     border-radius: 5px;
 }
 
@@ -36,9 +37,11 @@
     padding: 5px 15px;
     width: 100%;
     background-color: #F7EBE8;
+    text-align: center;
     color: black;
+    font-weight: 600;
 }
-
+    
 #wordBay-word {
     float: left;
     width: 50%
@@ -50,13 +53,14 @@
 }
 
 .wordBay-collapsible {
+    font-weight: 600;
     background-color: #1E1E24;
     color: #F7EBE8;
     cursor: pointer;
     padding: 18px;
     width: 100%;
     border: none;
-    text-align: left;
+    text-align: center;
     outline: none;
     font-size: 15px;
 }
@@ -71,6 +75,16 @@
     overflow: hidden;
     background-color: #F7EBE8;
 }
+
+#wordBay-first{
+    display: flex;
+    flex-direction: column;
+}
+
+#wordBay-first > p, h5{
+    margin: 0px;
+}
+
 
 #wordBay-tab1 {
     overflow-y: scroll;

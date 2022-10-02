@@ -52,7 +52,7 @@ const getDefinition = async () => {
          })).json()
 
          if(!definition[0] || definition_wordAPI.success == false){
-            await chrome.storage.sync.set({"wasFound" : false}, function() {
+            await chrome.storage.local.set({"wasFound" : false}, function() {
                console.log("No definitions were found. ") 
             })
             openWithInfo();
@@ -89,7 +89,7 @@ const getDefinition = async () => {
             python_response : python_response
          }
 
-         await chrome.storage.sync.set(newObject, function() {
+         await chrome.storage.local.set(newObject, function() {
             console.log("added object to storage ") 
             console.log(newObject)
          })

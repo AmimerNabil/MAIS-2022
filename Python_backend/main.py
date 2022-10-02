@@ -79,7 +79,8 @@ def getDef():
                 average_similarity += partialSum
                 word_count += 1
 
-        average_similarity = average_similarity/word_count
+        if word_count > 0:
+            average_similarity = average_similarity/word_count
 
         if average_similarity > best_sim: 
             best_sim = average_similarity

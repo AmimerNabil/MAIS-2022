@@ -92,7 +92,7 @@ chrome.runtime.onMessage.addListener(async function (request, sender, sendRespon
 // getting value from storage async
 function getStorageValuePromise(key){
     return new Promise((resolve) => {
-        chrome.storage.sync.get(key, resolve);
+        chrome.storage.local.get(key, resolve);
     })
 }
 
